@@ -3,7 +3,7 @@ import { TTextContainerProps } from "./types";
 
 export const TextContainer = styled.p<TTextContainerProps>`
   color: ${({ color }) => color};
-  font-family: ${({ theme: { fonts } }) => fonts.title};
+  font-family: ${({ theme: { fonts } }) => fonts.regular};
   font-size: ${({ size }) => size};
   line-height: 130%;
   font-weight: ${({ weight }) => weight};
