@@ -5,6 +5,11 @@ export const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  background: ${({ theme: { colors } }) => colors["background"]};
+  top: 0;
+  left: 0;
+  z-index: 1;
 `;
 
 export const RightContainer = styled.div`
