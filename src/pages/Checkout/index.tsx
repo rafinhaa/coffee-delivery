@@ -1,7 +1,10 @@
+import { CheckoutOrderForm } from "./sections/CheckoutOrderForm";
+import { CheckoutOrderContainer } from "./styles";
+
 export const Checkout = () => {
   return (
-    <div>
-      <h1>Checkout</h1>
-    </div>
+    <CheckoutOrderContainer>
+      <CheckoutOrderForm />
+    </CheckoutOrderContainer>
   );
 };
