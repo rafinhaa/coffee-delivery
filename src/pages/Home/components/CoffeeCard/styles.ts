@@ -76,7 +76,6 @@ export const AddCartWrapper = styled.div`
     background: ${({ theme: { colors } }) => colors["purple-dark"]};
     color: ${({ theme: { colors } }) => colors["base-card"]};
     margin-left: 0.3rem;
-    transition: 4s;
 
     &:hover {
       background: ${({ theme: { colors } }) => colors["purple"]};

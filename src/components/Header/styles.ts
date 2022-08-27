@@ -38,10 +38,6 @@ export const Location = styled(BaseButton)`
 `;
 
 export const Cart = styled(BaseButton)`
-  background-color: ${({ theme: { colors } }) => colors["purple-dark"]};
-  color: ${({ theme: { colors } }) => colors["base-card"]};
-
-  &:hover {
-    background-color: ${({ theme: { colors } }) => colors["purple"]};
-  }
+  background-color: ${({ theme: { colors } }) => colors["yellow-light"]};
+  color: ${({ theme: { colors } }) => colors["yellow-dark"]};
 `;
