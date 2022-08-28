@@ -9,6 +9,7 @@ export type CartContextType = {
   cartItems: CartItem[];
   cartQuantity: number;
   addCoffeeToCart: (item: CartItem) => void;
+  changeCheckoutItemAmount: (id: number, type: "increase" | "decrease") => void;
 };
 
 export type TCartContextProviderProps = {

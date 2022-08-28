@@ -6,6 +6,7 @@ export const CartContext = createContext<CartContextType>({
   cartItems: [],
   cartQuantity: 0,
   addCoffeeToCart: () => undefined,
+  changeCheckoutItemAmount: () => undefined,
 });
 
 export const CartContextProvider = ({
@@ -30,8 +31,28 @@ export const CartContextProvider = ({
     setCartItems(newCart);
   };
 
+  const changeCheckoutItemAmount = (
+    id: number,
+    type: "increase" | "decrease"
+  ) => {
+    const newCart = produce(cartItems, (draft) => {
+      const findItem = cartItems.findIndex((item) => item.id === id);
+      const item = draft[findItem];
+      item.quantity =
+        type === "increase" ? item.quantity + 1 : item.quantity - 1;
+    });
+    setCartItems(newCart);
+  };
+
   return (
-    <CartContext.Provider value={{ cartItems, cartQuantity, addCoffeeToCart }}>
+    <CartContext.Provider
+      value={{
+        cartItems,
+        cartQuantity,
+        addCoffeeToCart,
+        changeCheckoutItemAmount,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
