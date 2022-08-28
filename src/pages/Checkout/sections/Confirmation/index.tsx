@@ -24,7 +24,7 @@ export const Confirmation = () => {
           R$ {formatMoney(cartTotalPriceItens + deliveryPrice)}{" "}
         </Typography.Text>
       </div>
-      <ButtonContainer disabled={cartQuantity <= 0}>
+      <ButtonContainer disabled={cartQuantity <= 0} type="submit">
         Confirmar Pedido
       </ButtonContainer>
     </ConfirmationSectionContainer>
