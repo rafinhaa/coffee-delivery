@@ -1,3 +1,5 @@
+import { useFormContext } from "react-hook-form";
+
 import { Input } from "../../../../components/Input/input";
 import { Typography } from "../../../../components/Typography";
 import { SectionTitle } from "./components/SectionTitle";
@@ -10,7 +12,17 @@ import {
   PaymentMethodOptions,
 } from "./styles";
 
+type TErrors = {
+  errors: {
+    [x: string]: {
+      message: string;
+    };
+  };
+};
+
 export const CheckoutOrderForm = () => {
+  const { register, formState } = useFormContext();
+  const { errors } = formState as unknown as TErrors;
   return (
     <CheckoutOderFormContainer>
       <Typography.Title size="xs" color="subtitle">
@@ -23,13 +35,47 @@ export const CheckoutOrderForm = () => {
           type="map"
         />
         <AddressFormContainer>
-          <Input placeholder="CEP" type="number" className="cep" />
-          <Input placeholder="Rua" className="street" />
-          <Input placeholder="Número" type="number" />
-          <Input placeholder="Complemento" className="complement" />
-          <Input placeholder="Bairro" />
-          <Input placeholder="Cidade" />
-          <Input placeholder="UF" />
+          <Input
+            placeholder="CEP"
+            type="number"
+            className="cep"
+            {...register("cep")}
+            error={errors.cep?.message}
+          />
+          <Input
+            placeholder="Rua"
+            className="street"
+            {...register("street")}
+            error={errors.street?.message}
+          />
+          <Input
+            placeholder="Número"
+            type="number"
+            {...register("number")}
+            error={errors.number?.message}
+          />
+          <Input
+            placeholder="Complemento"
+            className="complement"
+            rightText="Opcional"
+            {...register("complement")}
+            error={errors.complement?.message}
+          />
+          <Input
+            placeholder="Bairro"
+            {...register("locale")}
+            error={errors.locale?.message}
+          />
+          <Input
+            placeholder="Cidade"
+            {...register("city")}
+            error={errors.city?.message}
+          />
+          <Input
+            placeholder="UF"
+            {...register("uf")}
+            error={errors.uf?.message}
+          />
         </AddressFormContainer>
       </FormSectionContainer>
       <FormSectionContainer>
