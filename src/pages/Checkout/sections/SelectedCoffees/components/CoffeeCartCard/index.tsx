@@ -13,7 +13,7 @@ import { CoffeeCartCardProps } from "./types";
 export const CoffeeCartCard = ({
   coffee: { id, photo, name, price, quantity },
 }: CoffeeCartCardProps) => {
-  const { changeCheckoutItemAmount } = useCart();
+  const { changeCheckoutItemAmount, removeCartItem } = useCart();
 
   const handleIncrease = () => {
     changeCheckoutItemAmount(id, "increase");
@@ -21,6 +21,10 @@ export const CoffeeCartCard = ({
 
   const handleDecrease = () => {
     changeCheckoutItemAmount(id, "decrease");
+  };
+
+  const handleDelete = () => {
+    removeCartItem(id);
   };
 
   const totalItemPrice = quantity * price;
@@ -36,7 +40,7 @@ export const CoffeeCartCard = ({
               onIncrease={handleIncrease}
               onDecrease={handleDecrease}
             />
-            <RemoveButton>
+            <RemoveButton onClick={handleDelete}>
               <Trash size={16} /> Remover
             </RemoveButton>
           </ActionsContainer>
