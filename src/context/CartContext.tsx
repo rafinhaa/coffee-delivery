@@ -5,6 +5,7 @@ import { CartContextType, CartItem, TCartContextProviderProps } from "./types";
 export const CartContext = createContext<CartContextType>({
   cartItems: [],
   cartQuantity: 0,
+  cartTotalPriceItens: 0,
   addCoffeeToCart: () => undefined,
   changeCheckoutItemAmount: () => undefined,
   removeCartItem: () => undefined,
@@ -15,6 +16,9 @@ export const CartContextProvider = ({
 }: TCartContextProviderProps) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const cartQuantity = cartItems.length;
+  const cartTotalPriceItens = cartItems.reduce((total, cartItem) => {
+    return total + cartItem.price * cartItem.quantity;
+  }, 0);
 
   const addCoffeeToCart = (coffee: CartItem) => {
     const coffeeAlreadyExistsInCart = cartItems.findIndex(
@@ -58,6 +62,7 @@ export const CartContextProvider = ({
       value={{
         cartItems,
         cartQuantity,
+        cartTotalPriceItens,
         addCoffeeToCart,
         changeCheckoutItemAmount,
         removeCartItem,
