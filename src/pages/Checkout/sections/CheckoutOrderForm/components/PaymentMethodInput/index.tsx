@@ -2,17 +2,12 @@ import { PaymentMethodContainer, ContentContainer } from "./styles";
 import { Bank, CreditCard, Money } from "phosphor-react";
 import { TPaymentMethodInput, TType } from "./types";
 import { forwardRef } from "react";
+import { paymentMapping } from "../../../../../../utils/formatMoney";
 
 export const PaymentMethodInput = forwardRef<
   HTMLInputElement,
   TPaymentMethodInput
 >(function PaymentMethodInput({ type, ...rest }, ref) {
-  const textMapping = {
-    card: "cartão de crédito",
-    bank: "cartão de débito",
-    cash: "dinheiro",
-  };
-
   const Icon = () => {
     if (type === "bank") return <Bank size={16} />;
     if (type === "card") return <CreditCard size={16} />;
@@ -32,7 +27,7 @@ export const PaymentMethodInput = forwardRef<
       <label htmlFor={type}>
         <ContentContainer>
           <Icon />
-          {textMapping[type as TType]}
+          {paymentMapping[type as TType]}
         </ContentContainer>
       </label>
     </PaymentMethodContainer>
