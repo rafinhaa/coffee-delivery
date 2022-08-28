@@ -9,7 +9,7 @@ export const QuantityInput = ({
 }: TQuantityInputProps) => {
   return (
     <QuantityInputContainer>
-      <IconWrapper onClick={onDecrease}>
+      <IconWrapper disabled={quantity <= 1} onClick={onDecrease}>
         <Minus size={14} weight="fill" />
       </IconWrapper>
       <input type="number" readOnly value={quantity} />
