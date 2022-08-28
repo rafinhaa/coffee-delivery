@@ -1,8 +1,12 @@
-import { PaymentMethodContainer } from "./styles";
+import { PaymentMethodContainer, ContentContainer } from "./styles";
 import { Bank, CreditCard, Money } from "phosphor-react";
-import { TPaymentMethodInput } from "./types";
+import { TPaymentMethodInput, TType } from "./types";
+import { forwardRef } from "react";
 
-export const PaymentMethodInput = ({ type }: TPaymentMethodInput) => {
+export const PaymentMethodInput = forwardRef<
+  HTMLInputElement,
+  TPaymentMethodInput
+>(function PaymentMethodInput({ type, ...rest }, ref) {
   const textMapping = {
     card: "cartão de crédito",
     bank: "cartão de débito",
@@ -17,8 +21,20 @@ export const PaymentMethodInput = ({ type }: TPaymentMethodInput) => {
 
   return (
     <PaymentMethodContainer>
-      <Icon />
-      {textMapping[type]}
+      <input
+        id={type}
+        type="radio"
+        {...rest}
+        name="paymentMethod"
+        ref={ref}
+        value={type}
+      />
+      <label htmlFor={type}>
+        <ContentContainer>
+          <Icon />
+          {textMapping[type as TType]}
+        </ContentContainer>
+      </label>
     </PaymentMethodContainer>
   );
-};
+});
