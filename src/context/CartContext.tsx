@@ -1,6 +1,11 @@
 import produce from "immer";
-import { createContext, useState } from "react";
-import { CartContextType, CartItem, TCartContextProviderProps } from "./types";
+import { createContext, useEffect, useState } from "react";
+import {
+  CartContextType,
+  CartItem,
+  COFFEE_ITEMS_STORAGE_KEY,
+  TCartContextProviderProps,
+} from "./types";
 
 export const CartContext = createContext<CartContextType>({
   cartItems: [],
@@ -14,7 +19,11 @@ export const CartContext = createContext<CartContextType>({
 export const CartContextProvider = ({
   children,
 }: TCartContextProviderProps) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const storedCartItems = localStorage.getItem(COFFEE_ITEMS_STORAGE_KEY);
+    if (storedCartItems) return JSON.parse(storedCartItems) as CartItem[];
+    return [];
+  });
   const cartQuantity = cartItems.length;
   const cartTotalPriceItens = cartItems.reduce((total, cartItem) => {
     return total + cartItem.price * cartItem.quantity;
@@ -56,6 +65,10 @@ export const CartContextProvider = ({
     });
     setCartItems(newCart);
   };
+
+  useEffect(() => {
+    localStorage.setItem(COFFEE_ITEMS_STORAGE_KEY, JSON.stringify(cartItems));
+  }, [cartItems]);
 
   return (
     <CartContext.Provider
