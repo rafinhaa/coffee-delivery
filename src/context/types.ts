@@ -8,6 +8,7 @@ export type CartItem = TCoffee & {
 export type CartContextType = {
   cartItems: CartItem[];
   cartQuantity: number;
+  cartTotalPriceItens: number;
   addCoffeeToCart: (item: CartItem) => void;
   changeCheckoutItemAmount: (id: number, type: "increase" | "decrease") => void;
   removeCartItem: (id: number) => void;
