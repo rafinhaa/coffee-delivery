@@ -7,6 +7,7 @@ export const CartContext = createContext<CartContextType>({
   cartQuantity: 0,
   addCoffeeToCart: () => undefined,
   changeCheckoutItemAmount: () => undefined,
+  removeCartItem: () => undefined,
 });
 
 export const CartContextProvider = ({
@@ -44,6 +45,14 @@ export const CartContextProvider = ({
     setCartItems(newCart);
   };
 
+  const removeCartItem = (id: number) => {
+    const newCart = produce(cartItems, (draft) => {
+      const findItem = cartItems.findIndex((item) => item.id === id);
+      draft.splice(findItem, 1);
+    });
+    setCartItems(newCart);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -51,6 +60,7 @@ export const CartContextProvider = ({
         cartQuantity,
         addCoffeeToCart,
         changeCheckoutItemAmount,
+        removeCartItem,
       }}
     >
       {children}

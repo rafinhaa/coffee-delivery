@@ -10,6 +10,7 @@ export type CartContextType = {
   cartQuantity: number;
   addCoffeeToCart: (item: CartItem) => void;
   changeCheckoutItemAmount: (id: number, type: "increase" | "decrease") => void;
+  removeCartItem: (id: number) => void;
 };
 
 export type TCartContextProviderProps = {
