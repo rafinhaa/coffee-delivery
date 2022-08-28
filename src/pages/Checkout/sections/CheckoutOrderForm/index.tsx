@@ -85,9 +85,12 @@ export const CheckoutOrderForm = () => {
           type="dollar"
         />
         <PaymentMethodOptions>
-          <PaymentMethodInput type="card" />
-          <PaymentMethodInput type="bank" />
-          <PaymentMethodInput type="cash" />
+          <PaymentMethodInput type="card" {...register("paymentMethod")} />
+          <PaymentMethodInput type="bank" {...register("paymentMethod")} />
+          <PaymentMethodInput type="cash" {...register("paymentMethod")} />
+          {errors.paymentMethod?.message && (
+            <Typography.Text>{errors.paymentMethod?.message}</Typography.Text>
+          )}
         </PaymentMethodOptions>
       </FormSectionContainer>
     </CheckoutOderFormContainer>
