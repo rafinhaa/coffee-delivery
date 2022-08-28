@@ -17,3 +17,5 @@ export type CartContextType = {
 export type TCartContextProviderProps = {
   children: ReactNode;
 };
+
+export const COFFEE_ITEMS_STORAGE_KEY = "coffeeDelivery:cartItems";
