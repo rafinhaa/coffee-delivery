@@ -14,6 +14,7 @@ export const CartContext = createContext<CartContextType>({
   addCoffeeToCart: () => undefined,
   changeCheckoutItemAmount: () => undefined,
   removeCartItem: () => undefined,
+  cleanCart: () => undefined,
 });
 
 export const CartContextProvider = ({
@@ -66,6 +67,11 @@ export const CartContextProvider = ({
     setCartItems(newCart);
   };
 
+  const cleanCart = () => {
+    localStorage.setItem(COFFEE_ITEMS_STORAGE_KEY, JSON.stringify([]));
+    setCartItems([]);
+  };
+
   useEffect(() => {
     localStorage.setItem(COFFEE_ITEMS_STORAGE_KEY, JSON.stringify(cartItems));
   }, [cartItems]);
@@ -79,6 +85,7 @@ export const CartContextProvider = ({
         addCoffeeToCart,
         changeCheckoutItemAmount,
         removeCartItem,
+        cleanCart,
       }}
     >
       {children}
