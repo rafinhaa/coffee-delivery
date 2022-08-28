@@ -40,4 +40,21 @@ export const Location = styled(BaseButton)`
 export const Cart = styled(BaseButton)`
   background-color: ${({ theme: { colors } }) => colors["yellow-light"]};
   color: ${({ theme: { colors } }) => colors["yellow-dark"]};
+  position: relative;
+
+  span {
+    position: absolute;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    top: calc(-1.25rem / 2);
+    right: calc(-1.25rem / 2);
+    color: ${({ theme: { colors } }) => colors["white"]};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: ${({ theme: { colors } }) => colors["yellow-dark"]};
+  }
 `;
