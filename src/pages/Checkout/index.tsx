@@ -6,6 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, FormProvider } from "react-hook-form";
 
 import { CheckoutOrderContainer } from "./styles";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../../hooks/useCart";
 
 enum PaymentMethods {
   card = "card",
@@ -30,19 +32,23 @@ const checkoutOrderFormValidationSchema = zod.object({
   }),
 });
 
-export type OderData = zod.infer<typeof checkoutOrderFormValidationSchema>;
+export type OrderData = zod.infer<typeof checkoutOrderFormValidationSchema>;
 
-type CheckoutOrderFormData = OderData;
+type CheckoutOrderFormData = OrderData;
 
 export const Checkout = () => {
   const checkoutOrderForm = useForm<CheckoutOrderFormData>({
     resolver: zodResolver(checkoutOrderFormValidationSchema),
   });
-
+  const navigate = useNavigate();
+  const { cleanCart } = useCart();
   const { handleSubmit } = checkoutOrderForm;
 
   const handleCheckoutOrder = (data: CheckoutOrderFormData) => {
-    console.log(data);
+    cleanCart();
+    navigate("/finished", {
+      state: data,
+    });
   };
 
   return (
